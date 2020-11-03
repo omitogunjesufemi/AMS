@@ -1,4 +1,6 @@
 class Passenger:
+
+    print('done')
     def __init__(self, name, email, address):
         self.__name = name
         self.__email = email
@@ -11,7 +13,7 @@ class Passenger:
         return self.__name
 
     def setEmail(self, email):
-        self.__name = name
+        self.__email = email
 
     def getEmail(self):
         return self.__email
