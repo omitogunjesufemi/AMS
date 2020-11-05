@@ -1,25 +1,9 @@
 class Passenger:
+    def __init__(self, name, idNo, email, address):
+        self.name = name
+        self.idNo = idNo
+        self.email = email
+        self.address = address
 
-    print('done')
-    def __init__(self, name, email, address):
-        self.__name = name
-        self.__email = email
-        self.__address = address
-
-    def setName(self, name):
-        self.__name = name
-
-    def getName(self):
-        return self.__name
-
-    def setEmail(self, email):
-        self.__email = email
-
-    def getEmail(self):
-        return self.__email
-
-    def setAddress(self, address):
-        self.__address = address
-
-    def getAddress(self):
-        return self.__address
+    def __str__(self):
+        return f"{self.name:<12s}{self.idNo:<19s}{self.address:<13s}{self.email}"
