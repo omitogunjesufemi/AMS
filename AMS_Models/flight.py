@@ -7,4 +7,4 @@ class Flight:
         self.time = time
 
     def __str__(self):
-        return f" {self.aircraft} {self.takeoffLocation} {self.destination} {self.date} {self.time}"
+        return f"{self.aircraft:18s}{self.takeoffLocation:16s}{self.destination:19s}{self.date:12s}{self.time}"

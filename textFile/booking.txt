@@ -1,0 +1,5 @@
+OM              567                Return           First             1
+OM              ARK-12-20          Return           First             2
+OM              ARK-12-20          FIF              ADA               3
+FM              567                Return           First             4
+FM              ARK-12-20          One-Way          Business          5

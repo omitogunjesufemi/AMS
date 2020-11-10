@@ -2,155 +2,177 @@ from ams_service.aircraftManager import AircraftManager
 from ams_service.flightManager import FlightManager
 from ams_service.bookingManager import BookingManager
 from ams_service.passengerManager import PassengerManager
+import sys
 
 aircraftmanager = AircraftManager()
 flightmanager = FlightManager(aircraftmanager)
 passengermanager = PassengerManager()
 bookingmanager = BookingManager(passengermanager, flightmanager)
 
+
 def main():
     flag = True
     while flag:
         mainmenu()
-        command = input('please input a command: ')
-        subMenu(command)
-        if command == 0:
+        command = input('Please input a command: ')
+        if command == '0':
             flag = False
+        else:
+            subMenu(command)
 
 
-#AIRCRAFT MANAGEMENT SERVICE MENU - (MAIN MENU)
+
+# the exit button.
+# AIRCRAFT MANAGEMENT SERVICE MENU - (MAIN MENU)
 def mainmenu():
     print(
-'''
-press 0 to exit
-press 1 for AircraftManagement
-press 2 for FlightManagement
-press 3 for Passenger Management
-press 4 for Booking Management
+        '''
+Press 0 to exit
+Press 1 for AircraftManagement
+Press 2 for FlightManagement
+Press 3 for Passenger Management
+Press 4 for Booking Management
 '''
     )
-#COMMAND LINE FOR SUBMENU
+
+
+# COMMAND LINE FOR SUBMENU
 def subMenu(command):
     if command == '1':
         aircraftMenu()
-        new_command = input('please input a command to perform an operation')
+        new_command = input('Please input a command to perform an operation: ')
         if new_command == '0':
-            mainmenu()
+            pass
         else:
             aircraftHandler(new_command)
 
     elif command == '2':
         flightMenu()
-        new_command = input('please input a command to perform an operation')
+        new_command = input('Please input a command to perform an operation: ')
         if new_command == '0':
-            mainmenu()
+            pass
         else:
             flightHandler(new_command)
 
     elif command == '3':
         passengerMenu()
-        new_command = input('please input a command to perform an operation')
+        new_command = input('Please input a command to perform an operation: ')
         if new_command == '0':
-            mainmenu()
+            pass
         else:
             passengerHandler(new_command)
 
     elif command == '4':
         bookingMenu()
-        new_command = input('please input a command to perform an operation')
+        new_command = input('Please input a command to perform an operation: ')
         if new_command == '0':
-            mainmenu()
+            pass
         else:
             bookingHandler(new_command)
 
 
-#AIRCRAFT MANAGEMENT SYSTEM SERVICE OPTION MENU (SUB-MENU)
+# AIRCRAFT MANAGEMENT SYSTEM SERVICE OPTION MENU (SUB-MENU)
 def aircraftMenu():
     print(
         '''
-press 1 to add Aircraft
-press 2 to Update Aircraft
-press 3 to List Aircraft
-press 4 to Delete Aircraft
-press 0 to Go back to main menu
+Press 1 to add Aircraft
+Press 2 to Search for an Aircraft
+Press 3 to Update Aircraft
+Press 4 to List Aircraft
+Press 5 to Delete Aircraft
+Press 0 to Go back to main menu
         '''
     )
 
+
 def flightMenu():
     print('''
-press 1 to add Flight
-press 2 to Update Flight
-press 3 to List Flight
-press 4 to Delete Flight
-press 0 to go back to main menu
+Press 1 to add Flight
+Press 2 to Search for a Flight
+Press 3 to Update Flight
+Press 4 to List Flight
+Press 5 to Delete Flight
+Press 0 to go back to main menu
     ''')
+
 
 def passengerMenu():
     print('''
-press 1 to add Passenger
-press 2 to Update Passenger
-press 3 to List Passenger
-press 4 to Delete Passenger
-press 0 to go back to main menu
+Press 1 to add Passenger
+Press 2 to Search for a Passenger
+Press 3 to Update Passenger
+Press 4 to List Passenger
+Press 5 to Delete Passenger
+Press 0 to go back to main menu
     ''')
+
 
 def bookingMenu():
     print('''
-press 1 to add Booking
-press 2 to Update Booking
-press 3 to List Booking
-press 4 to Delete Booking
-press 0 to go back to main menu
+Press 1 to add Booking
+Press 2 to Search for a Booking
+Press 3 to Update Booking
+Press 4 to List Booking
+Press 5 to Delete Booking
+Press 0 to go back to main menu
     ''')
 
 
-#AIRCRAFT MANAGEMENT SERVICE HANDLER
+# AIRCRAFT MANAGEMENT SERVICE HANDLER
 def aircraftHandler(new_command):
     if new_command == '1':
-        name = input('enter the name of aircraft: ')
-        capacity = input('enter aircraft capacity: ')
-        model = input('enter the aircraft model: ')
-        regNo = input('enter the registration number: ')
+        name = input('Enter the name of aircraft: ')
+        capacity = input('Enter aircraft capacity: ')
+        model = input('Enter the aircraft model: ')
+        regNo = input('Enter the registration number: ')
         aircraftmanager.createCraft(name, model, capacity, regNo)
     elif new_command == '2':
-        name = input('enter the name of aircraft: ')
-        capacity = input('enter aircraft capacity: ')
-        model = input('enter the aircraft model: ')
-        regNo = input('enter the registration number: ')
-        aircraftmanager.updateCraft(name, model, capacity, regNo)
+        regNo = input('Please input the registration number of aircraft to retrieve: ')
+        aircraftmanager.retrieveCraft(regNo)
     elif new_command == '3':
-        aircraftmanager.printCraft()
+        name = input('Enter the name of aircraft: ')
+        capacity = input('Enter aircraft capacity: ')
+        model = input('Enter the aircraft model: ')
+        regNo = input('Enter the registration number: ')
+        aircraftmanager.updateCraft(name, model, capacity, regNo)
     elif new_command == '4':
-        regNo = input('please input the registration number of aircraft to delete: ')
+        aircraftmanager.printCraft()
+    elif new_command == '5':
+        regNo = input('Please input the registration number of aircraft to delete: ')
         aircraftmanager.deleteCraft(regNo)
     else:
         print('Your Input does not Exist')
 
     subMenu('1')
 
-#FLIGHT MANGEMENT SERVICE HANDLER
+
+# FLIGHT MANGEMENT SERVICE HANDLER
 def flightHandler(new_command):
     if new_command == '1':
         aircraft = input('Enter the registration number of the aircraft: ')
-        takeoffLocation = input('enter state of Departure: ')
-        destination = input('enter the arrival country: ')
-        date = input('enter the date of flight: ')
-        time = input('enter the time of flight: ')
+        takeoffLocation = input('Enter state of Departure: ')
+        destination = input('Enter the arrival country: ')
+        date = input('Enter the date of flight: ')
+        time = input('Enter the time of flight: ')
         flightmanager.createFlight(aircraft, takeoffLocation, destination, date, time)
 
     elif new_command == '2':
-        aircraft = input('Enter the registration number of the aircraft: ')
-        takeoffLocation = input('enter state of Departure: ')
-        destination = input('enter the arrival country: ')
-        date = input('enter the date of flight: ')
-        time = input('enter the time of flight: ')
-        flightmanager.updateFlight(aircraft, takeoffLocation, destination, date, time)
+        regNo = input('Please input the registration number of the airline to retrieve flight: ')
+        flightmanager.retrieveFlight(regNo)
 
     elif new_command == '3':
-        flightmanager.printFlight()
+        aircraft = input('Enter the registration number of the aircraft: ')
+        takeoffLocation = input('Enter state of Departure: ')
+        destination = input('Enter the arrival country: ')
+        date = input('Enter the date of flight: ')
+        time = input('Enter the time of flight: ')
+        flightmanager.updateFlight(aircraft, takeoffLocation, destination, date, time)
 
     elif new_command == '4':
-        aircraft = input('please input the aircraft to delete flight: ')
+        flightmanager.printFlight()
+
+    elif new_command == '5':
+        aircraft = input('Please input the aircraft to delete flight: ')
         flightmanager.deleteFlight(aircraft)
 
     else:
@@ -158,33 +180,39 @@ def flightHandler(new_command):
 
     subMenu('2')
 
-#PASSENGER MANAGEMENT SERVICE HANDLER
+
+# PASSENGER MANAGEMENT SERVICE HANDLER
 def passengerHandler(new_command):
     if new_command == '1':
-        name = input('enter the name of passenger: ')
-        idNo = input('enter the identification number: ')
-        email = input('enter the email: ')
-        address = input('enter the address: ')
+        name = input('Enter the name of passenger: ')
+        idNo = input('Enter the identification number: ')
+        email = input('Enter the email: ')
+        address = input('Enter the address: ')
         passengermanager.createUser(name, idNo, email, address)
 
     elif new_command == '2':
-        name = input('enter the name of a: ')
-        idNo = input('enter state of Departure: ')
-        email = input('enter the arrival country: ')
-        address = input('enter the date of flight: ')
-        passengermanager.updateUser(name, idNo, email, address)
+        idNo = input('Please input the Passenger-ID to retrieve details: ')
+        passengermanager.retrieveUser(idNo)
 
     elif new_command == '3':
-        passengermanager.printUser()
+        name = input('Enter the name of Passenger: ')
+        idNo = input('Enter the Passenger ID: ')
+        email = input('Enter the email of the Passenger: ')
+        address = input('Enter the address of the Passenger: ')
+        passengermanager.updateUser(name, idNo, email, address)
 
     elif new_command == '4':
-        idNo = input('please input the passenger id to delete: ')
+        passengermanager.printUser()
+
+    elif new_command == '5':
+        idNo = input('Please input the passenger id to delete: ')
         passengermanager.deleteUser(idNo)
 
     else:
         print('Your Input does not Exist')
 
     subMenu('3')
+
 
 # BOOKING MANAGEMENT SERVICE HANDLER
 def bookingHandler(new_command):
@@ -196,18 +224,23 @@ def bookingHandler(new_command):
         bookingmanager.createBooking(passenger, flight, ticketType, ticketClass)
 
     elif new_command == '2':
+        seatNumber = int(input('Please input the seat number to retrieve the booking for the passenger: '))
+        bookingmanager.retrieveBooking(seatNumber)
+
+    elif new_command == '3':
         passenger = input('Enter the passenger ID number: ')
         flight = input('Enter the flight aircraft registration number: ')
         ticketType = input('Enter the ticket type: ')
         ticketClass = input('Enter the ticket Class: ')
-        bookingmanager.updateBooking(passenger, flight, ticketType, ticketClass)
-
-    elif new_command == '3':
-        bookingmanager.printBooking()
+        seatNumber = input('Enter the passenger seat number: ')
+        bookingmanager.updateBooking(passenger, flight, ticketType, ticketClass, seatNumber)
 
     elif new_command == '4':
-        idNo = input('please input the passenger id to delete: ')
-        bookingmanager.deleteBooking(idNo)
+        bookingmanager.printBooking()
+
+    elif new_command == '5':
+        seatNumber = input('Please input the passenger seat number to delete booking: ')
+        bookingmanager.deleteBooking(seatNumber)
 
     else:
         print('Your Input does not Exist')

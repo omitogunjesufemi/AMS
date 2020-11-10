@@ -11,4 +11,4 @@ class Aircraft:
         self.regNo = regNo
 
     def __str__(self):
-        return f"{self.name:<8s}{self.model:<13s}{self.capacity:<12s}{self.regNo}"
+        return f"{self.name:<8}{self.model:<13}{self.capacity:<12}{self.regNo}"
